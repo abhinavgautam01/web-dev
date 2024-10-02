@@ -1,0 +1,9 @@
+.first{
+    background-image: linear-gradient(45deg,#f12727, #42d542);
+    color:aqua;
+    font-weight: bold;
+    font-size: 30px;
+    border-radius: 30px;
+    border-top-right-radius: 0;
+    padding: 10px;
+}
