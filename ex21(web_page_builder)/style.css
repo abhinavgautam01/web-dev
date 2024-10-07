@@ -1,0 +1,40 @@
+*{
+    font-family: sans-serif;
+}
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:2px solid black;
+    margin: 1px;
+}
+.image{
+    width: 346px;
+    height:176px;
+    position: relative;
+}
+.img1{
+    width: 338px;
+    height:172px;
+    border:2px solid black;
+}
+.text{
+    padding: 10px;
+    width:100vw;
+}
+.text p{
+    font-size: 19px;
+}
+.capsule{
+    position: absolute;
+    z-index: 10;
+    bottom: 4px;
+    right:5px;
+    background: #242020;
+    opacity:0.9;
+    color:white;
+    padding:3px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
