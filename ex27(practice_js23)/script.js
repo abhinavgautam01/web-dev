@@ -1,14 +1,17 @@
 
-// import {a,d,b,c} from "./module1.js"
-// import golu from "./module1.js"
+import {a,d,b,c} from "./module1.js"
+import golu from "./module1.js"
 
 
 console.log(golu) //default import
 
 
 console.log(a,b,c,d)  //named import
-console.log(a+d)
+console.log(a)
+console.log(b)
+console.log(c)
 console.log(d)
+console.log("a+c :", a+c)
 
 
 // const fs = require("fs")
@@ -26,7 +29,7 @@ console.log(d)
 
 
 
-const a = require("./module2.js")
-console.log(a, __dirname)
+// const a = require("./module2.js")
+// console.log(a, __dirname)
 
-f
+// f
