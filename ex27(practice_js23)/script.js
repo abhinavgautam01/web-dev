@@ -3,12 +3,12 @@
 // import golu from "./module1.js"
 
 
-// console.log(golu) //default import
+console.log(golu) //default import
 
 
-// console.log(a,b,c,d)  //named import
-// console.log(a+d)
-// console.log(d)
+console.log(a,b,c,d)  //named import
+console.log(a+d)
+console.log(d)
 
 
 // const fs = require("fs")
