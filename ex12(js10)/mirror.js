@@ -8,4 +8,5 @@ function mirrorString(original) {
 // Example usage:
 const input = "hello";
 const mirrored = mirrorString(input);
+
 console.log(mirrored); // Output: "helloolleh"
