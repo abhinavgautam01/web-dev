@@ -39,7 +39,8 @@ app.get("/api/first_api", (req, res) => {
     
 })
 app.get("/api/second_api", (req, res) => {
-    res.json({ a: 1, b: 2, c: 3, d: 4, name: ["golu", "Abhinav"] })
+    // res.json({ a: 1, b: 2, c: 3, d: 4, name: ["golu", "Abhinav"] })
+    res.send("This is Second api..!")
     
 })
 
