@@ -4,7 +4,7 @@ const port = 3000
 const blog = require('./routes/blog')
 const fs = require("fs")
 
-// app.use(express.static("public"))
+// app.use(express.static("public"))   , used for displaying file like (html,txt) from public
 
 app.use('/blog', blog)
 
@@ -12,7 +12,7 @@ app.use('/blog', blog)
 app.use((req, res, next) => {
     // console.log(req.headers)
     req.golu = "I am Gautam bhai";
-    fs.appendFileSync("logs.txt", `${Date.now()} is a ${req.method}\n`)
+    fs.appendFileSync("logs.txt", `${Date.now()} is a ${req.method}\n`) //create a file and append time stamp...
     console.log(`${Date.now()} is a ${req.method}`)
     // res.send("Hacked by Middlware 1")
     next()
