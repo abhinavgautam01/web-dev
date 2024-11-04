@@ -10,8 +10,8 @@ app.use('/blog', blog)
 
 // Middleware 1 - Logger for our application
 app.use((req, res, next) => {
-    console.log(req.headers)
-    req.golu = "I am harry bhai";
+    // console.log(req.headers)
+    req.golu = "I am Gautam bhai";
     fs.appendFileSync("logs.txt", `${Date.now()} is a ${req.method}\n`)
     console.log(`${Date.now()} is a ${req.method}`)
     // res.send("Hacked by Middlware 1")
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 // Middleware 2
 app.use((req, res, next) => {
     console.log('m2')
-    req.golu = "I am Rohan bhai";
+    req.golu = "I am Golu bhai";
     next()
 })
 
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    res.send('Hello about!' + req.harry)
+    res.send('Hello about!' + req.golu)
 })
 
 app.get('/contact', (req, res) => {
