@@ -16,17 +16,17 @@ app.get('/', (req, res) => {
     res.send('Hello World221!')
 }).post('/', (req, res) => {
     console.log("Hey its a post request")
-    res.send('Hello World post!')
+    res.send('Hello World post!')  //post res.send:-> display/show message on the console of website...
 })
 
-app.put('/', (req, res) => {
+app.put('/', (req, res) => {        //put request is used to update...
     console.log("Hey its a put request")
     res.send('Hello World put!')
 })
 
 app.get("/index", (req, res) => {
     console.log("Hey its index")
-    res.sendFile('templates/index.html', { root: __dirname })
+    res.sendFile('templates/index.html', { root: __dirname })  //sendfile is used to render files(html)/serve html(files) , send is used to send/display message on web browser
 })
 
 app.get("/api", (req, res) => {
