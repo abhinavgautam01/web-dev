@@ -7,7 +7,10 @@ const fs = require("fs")
 app.use(express.static("public")) //  , used for displaying file like (html,txt) from public
 
 app.use('/blog', blog)
-//middleware can change the request/can send the response or can give control to next middleware
+
+//middleware can change request/can modify request, can send the response or can give control to next middleware
+
+
 // Middleware 1 - Logger for our application
 app.use((req, res, next) => {
     // console.log(req.headers)
