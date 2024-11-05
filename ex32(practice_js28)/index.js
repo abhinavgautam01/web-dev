@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 
 app.set('view engine', 'ejs');
-
+//using ejs
 // https://github.com/mde/ejs/wiki/Using-EJS-with-Express
 
 app.get('/', (req, res) => {
