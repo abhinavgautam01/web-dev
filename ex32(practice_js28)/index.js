@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     let siteName = "Adidas"
     let searchText = "Search Now"
     let arr = ["Hey", 54, 65]
-    res.render("index", { siteName: siteName, searchText: searchText, arr })
+    res.render("index", { siteName: siteName, searchText: searchText, arr })    //render is used to render ejs file()...
 })
 
 app.get('/blog/:slug', (req, res) => {
