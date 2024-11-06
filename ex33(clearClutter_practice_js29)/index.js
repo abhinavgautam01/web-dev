@@ -20,23 +20,24 @@ import fs from "fs/promises"
 import fsn from "fs"
 import path from "path"
 
-const basepath = "C:\\Users\\iitia\\Downloads\\Sigma Web Development Course\\Sigma-Web-Dev-Course\\Video 93"
-
+const basepath = "/Users/gautam/Documents/web/ex33(practice_js29)"
+//pwd : print working directory
 let files = await fs.readdir(basepath)
 
 for (const item of files) {
-    console.log("running for ", item)
-    let ext = item.split(".")[item.split(".").length - 1]
+    // console.log("running for ", item)
+    let ext = item.split(".")[item.split(".").length - 1]   //let ext = item.split(".").pop(); // Get the file extension
     if (ext != "js" && ext != "json" && item.split(".").length > 1) {
-
+        const extFolder = path.join(basepath, ext); // Target folder path
 
         if (fsn.existsSync(path.join(basepath, ext))) {
+            // if (fsn.existsSync(path.join(basepath, ext))) {   //if (fsn.existsSync(extFolder))
             // Move the file to this directory if its not a js or json file
-            fs.rename(path.join(basepath, item), path.join(basepath, ext, item))
+            await fs.rename(path.join(basepath, item), path.join(basepath, ext, item))
         }
         else {
-            fs.mkdir(ext)
-            fs.rename(path.join(basepath, item), path.join(basepath, ext, item))
+            await fs.mkdir(extFolder)
+            await fs.rename(path.join(basepath, item), path.join(basepath, ext, item))
         }
     }
 
