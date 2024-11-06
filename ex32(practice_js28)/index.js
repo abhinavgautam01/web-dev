@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 
 app.set('view engine', 'ejs');
-//using ejs
+//using ejs , (template engine);  template engines are used to set up variables/data or fit them with the template respectively
 // https://github.com/mde/ejs/wiki/Using-EJS-with-Express
 
 app.get('/', (req, res) => {
@@ -14,9 +14,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/blog/:slug', (req, res) => {
-    let blogTitle = "Adidas why and when?"
-    let blogContent = "Its a very good brand"
-    res.render("blogpost", {blogTitle: blogTitle, blogContent: blogContent})
+    let siteName = "Adidas why and when?"
+    let searchText = "Its a very good brand"
+    let arr = ["Blog", 54, 65]
+    res.render("blogpost", {siteName,searchText, arr})
 })
 
 app.listen(port, () => {
