@@ -10,7 +10,7 @@ const app = express()
 const mongoose = require('mongoose');
 const Employee = require("./models/Employee")
 
-conn = mongoose.connect('mongodb://127.0.0.1:27017/company');
+conn = mongoose.connect('mongodb://localhost:27017/company');
 const port = 3000
 
 app.set('view engine', 'ejs');
