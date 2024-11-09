@@ -7,11 +7,13 @@
 
 const express = require('express')
 const app = express()
+const port = 3000
+
 const mongoose = require('mongoose');
+//schema of databse -> models
 const Employee = require("./models/Employee")
 
 conn = mongoose.connect('mongodb://localhost:27017/company');
-const port = 3000
 
 app.set('view engine', 'ejs');
 
@@ -23,6 +25,7 @@ const getRandom = (arr)=>{
 
 app.get('/', (req, res) => {
     res.render('index', { foo: 'FOO' });
+    //render pages mathcing with the bootsrtrap template(like ejs), which are inside views folder
 })
 
 app.get('/generate', async (req, res) => {
@@ -30,9 +33,9 @@ app.get('/generate', async (req, res) => {
     await Employee.deleteMany({}) 
     // Generate random data
 
-    let randomNames = ['Rohan', "Sohan", "Mohan", "Sobhan"]
-    let randomLang = ["Python", "js", "C++", "Java"]
-    let randomCities = ["Bilaspur", "Moradabad", "Mysore", "Kolkata"]
+    let randomNames = ['Golu', "Abhinav", "Gautam", "abc"]
+    let randomLang = ["php", "java", "C", "JavaScript"]
+    let randomCities = ["Kullu", "kangra", "assam", "Kolkata"]
     for (let index = 0; index < 10; index++) {
         let e = await Employee.create({
             name: getRandom(randomNames),
@@ -42,10 +45,7 @@ app.get('/generate', async (req, res) => {
             isManager: (Math.random()>0.5)?true:false
         })
         console.log(e)
- 
-
     }
-
     res.render('index', { foo: 'FOO' });
 })
 
