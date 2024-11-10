@@ -59,3 +59,5 @@ Now restart using:
 ```
 sudo systemctl restart nginx
 ```
+
+<!-- FILEZILLA : Can be used to send files in bulk..! -->
