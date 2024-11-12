@@ -1,0 +1,13 @@
+nav, ul{
+    display: flex;
+    gap:4px;
+    background-color: beige;
+    margin: 0;
+    padding: 12px 3px;
+    color:rgb(225, 63, 63);
+    margin-bottom: 9px;
+}
+
+li{
+    list-style: none;
+}
