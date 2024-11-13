@@ -27,7 +27,7 @@ function App() {
     <Navbar/>
     <div className="container">
       {cards.map((card)=>{
-        return <div key="card.userId" className="card">
+        return <div key="card.id" className="card">
           <h1>{card.title}</h1>
           <p>{card.body}</p>
           <span>By : UserId: {card.userId}</span>
