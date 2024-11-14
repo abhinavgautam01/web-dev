@@ -32,7 +32,8 @@ li{
     border-radius: 20px;
     border-top-right-radius: 0;
     padding:5px 10px;
-    background-image: linear-gradient(45deg, #768842, #ffc2ba);
+    background-color: blue;
+    /* background-image: linear-gradient(45deg, #768842, #ffc2ba); */
     color:white;
     font-size: 17px;
     font-weight: bold;
@@ -40,6 +41,7 @@ li{
 .btn:hover{
     border-top-right-radius: 20px;
     border-bottom-left-radius: 0;
+    background-color: red;
     transition: 0.5s;
 }
 .main{
