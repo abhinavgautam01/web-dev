@@ -1,13 +1,15 @@
 import React from 'react'
 import Button from './Button'
 
-const Navbar = ({count}) => {
+//props.count
+
+const Navbar = () => {
   return (
     <>
     <div>
       Navbar
     </div>
-    <button count={count}/>
+    <Button/>
     </>
   )
 }
