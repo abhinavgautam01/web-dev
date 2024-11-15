@@ -9,7 +9,7 @@ import About from './components/About'
 import User from './components/User'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-//13:35
+//react-router is used so we don't have to do params drilling into components, wr can directly get that param by importing it to that component
 function App() {
   const router = createBrowserRouter([
     {

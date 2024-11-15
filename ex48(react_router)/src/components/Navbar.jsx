@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
+//NavLink is used so that page does not refresh , just it changes the /address when opened new link ...!
 const Navbar = () => {
     
   return (
