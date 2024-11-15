@@ -9,20 +9,22 @@ function App() {
   // // Use 1 :=>
 //   // let a = 0
 //   const a = useRef(0)
-//   // by using ref does not re-render....
+//   // by using useRef(reference) hook particular component(variable...) does not re-render across all the components...its value persists and continue to change every time when operation/event is triggered...!
+//  but when useRef hook is not is not used the value does not persist..every time the component is re-rendered the function is also re-rendered and the value intializes again to base value( like a=0, will continue to change to a=0 everytime the component is re-rendered) 
 
 //   //by using useState /useEffect/ it re-render, each time it is used...!
 //   useEffect(() => {
-//     a.current=a.current+1
+//     a.current=a.current+1     //value can be fetched by .current of the variable 
 //     console.log(`rerendering and the value of a is ${a.current}...`)
 //   })
 
 // Use 2 :=>
+  //we can also access any Document object model(DOM) element 
     // let a = 0
     const btnref = useRef()
   
     useEffect(() => {
-      console.log(`First rerendering...`)
+      console.log(`First rendering...`)
       btnref.current.style.backgroundColor = "red"
     },[])
 
