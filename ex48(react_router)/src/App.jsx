@@ -9,7 +9,7 @@ import About from './components/About'
 import User from './components/User'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-//react-router is used so we don't have to do params drilling into components, wr can directly get that param by importing it to that component
+//react router is used to make multiple page application...and by using this our page does not reload , while surfing through multile pages..!
 function App() {
   const router = createBrowserRouter([
     {
