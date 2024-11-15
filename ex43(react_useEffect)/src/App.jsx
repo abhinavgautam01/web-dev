@@ -10,16 +10,17 @@ function App() {
   const [color, setColor] = useState(0)
 
 
-
+//useEffect is a react hook, which runs after mounting of component :-> it provides sideEffects as something will happen like (dataFetch, logData, retrive data from  database, or give any alert) after a particular component is rendered
 
   useEffect(() => {
     alert("Count was changed")
     setColor(color+1)
   }, [count])
+  //like in above useEffect, it will be only triggered when the value of count was rendered/changed and alert message will be displayed and it will also change/render value of color and trigger useEffect of case 3 (which is in Navbar.jsx)..!
   
   return (
     <>
-      <Navbar color={"navy " + " blue" + color}/>
+      <Navbar color={"navy " + " blue "  + color}/>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
