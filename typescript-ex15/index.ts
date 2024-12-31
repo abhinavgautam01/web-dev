@@ -19,3 +19,17 @@ type FirstElement<T> = (arr: T[])=>T
 const firstElement: FirstElement<string> = (arr)=>{
     return arr[0]
 }
+//genric and constraints with arrays
+
+type HasLength = {
+    length: number
+}
+function logLength<T extends HasLength>(item: T): void{
+    console.log("item.length: ",item.length);
+}
+logLength(numbersArray)
+logLength(stringArray)
+logLength("stringArray")
+
+logLength({name : "John", length:12})
+//genric constraints are very useful when you want to narrow down your generics to a specific type...

@@ -15,3 +15,11 @@ console.log("stringOutput: ", stringOutput);
 const firstElement = (arr) => {
     return arr[0];
 };
+function logLength(item) {
+    console.log("item.length: ", item.length);
+}
+logLength(numbersArray);
+logLength(stringArray);
+logLength("stringArray");
+logLength({ name: "John", length: 12 });
+//genric constraints are very useful when you want to narrow down your generics to a specific type...
