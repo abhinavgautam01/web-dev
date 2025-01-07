@@ -26,3 +26,13 @@ class User {
 const user = new User();
 console.log("User: ", user);
 console.log("User: ", user.greet());
+class newUser {
+    constructor(name, email) {
+        console.log(name);
+        console.log(email);
+    }
+    greet() {
+        return 'Hello Golu';
+    }
+}
+const newuser = new newUser("Abhinav", "abcd@gmail.com");
