@@ -26,6 +26,13 @@ console.log("userThree.greet(): ",userThree.greet());
 //inheritance
 class Admin extends User {
     isAdmin: boolean = true
+    usersReporting: number
+    constructor(name: string, email: string, usersReporting: number, lastname?: string){
+        super(name, email, lastname)
+        this.usersReporting = usersReporting
+    }
 }
-const admin: Admin = new Admin("admin", "admin@gmail.com", "hai")
+const admin: Admin = new Admin("admin", "admin@gmail.com", 11, "hai",)
 console.log("admin: ", admin);
+
+//super method
