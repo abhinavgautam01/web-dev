@@ -36,3 +36,59 @@ const admin: Admin = new Admin("admin", "admin@gmail.com", 11, "hai",)
 console.log("admin: ", admin);
 
 //super method
+
+
+class Book {
+    title: string
+    author: string
+    yearPublished?: number
+    readonly ISBN: string
+    constructor(title: string, author: string, ISBN: string, yearPublished?: number){
+        this.title = title
+        this.author = author
+        this.ISBN = ISBN
+        if(yearPublished){
+            this.yearPublished = yearPublished
+        }
+    }
+}
+const firstBook: Book = new Book("FirstBook", "Golu", "123abc", 2024)
+console.log("First Book: ", firstBook);
+
+function logBookDetails(book: Book):void{
+    console.log(`Title: ${book.title}`);
+    console.log(`Author: ${book.author}`);
+    console.log(`ISBN: ${book.ISBN}`);
+    if(book.yearPublished){
+        console.log(`Year Published: ${book.title}`);
+    }
+}
+logBookDetails(firstBook)
+
+class EBook extends Book{
+    fileSize: number
+    format: string
+    constructor(title: string, author: string, ISBN: string, fileSize: number, format: string, yearPublished?: number){
+        super(title, author, ISBN, yearPublished)
+        this.fileSize = fileSize
+        this.format = format
+    }
+}
+const firstEBook: EBook = new EBook("NewEBook", "Golu", "123abc", 100, ".pdf", 2024)
+function logEBookDetails(book: EBook):void{
+    console.log(`Title: ${book.title}`);
+    console.log(`Author: ${book.author}`);
+    console.log(`ISBN: ${book.ISBN}`);
+    console.log(`FileSize: ${book.fileSize}kb`);
+    console.log(`Format: ${book.format}`);
+    
+    if(book.yearPublished){
+        console.log(`Year Published: ${book.title}`);
+    }
+}
+console.log(".....");
+//logBookDetails also works as this function takes parameter as the base class of the argument passed, which means instance of child class can also be used ...
+logBookDetails(firstEBook)
+console.log(".....");
+logEBookDetails(firstEBook)
+console.log(".....");
