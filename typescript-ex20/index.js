@@ -13,6 +13,9 @@ class User {
     greet() {
         return `Hello ${this.name}`;
     }
+    printPhone() {
+        console.log(this.phone);
+    }
 }
 const user = new User("Golu", "golu@gmail.com", 1234);
 console.log("User: ", user);
@@ -25,12 +28,6 @@ class Admin extends User {
     printName() {
         console.log(this.name);
     }
-    printPhone() {
-        console.log(this.phone);
-    }
-    useProtectedPhone() {
-        this.printPhone();
-    }
 }
 const adminUser = new Admin("Abhinav", "abhinav@gmail.com", 8291, 3, "Gautam");
 console.log("Admin: ", adminUser);
@@ -41,4 +38,5 @@ console.log(user.name);
 //protected members..!
 console.log("----");
 console.log("phone: ");
-adminUser.useProtectedPhone();
+// adminUser.useProtectedPhone()
+user.printPhone();

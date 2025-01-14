@@ -5,7 +5,8 @@ class User{
     public name: string
     readonly email: string
     lastName?: string
-    protected phone: number
+    // protected phone: number
+    private phone: number
 
     constructor(name: string, email: string, phone:number, lastName?: string){
         this.name = name
@@ -17,6 +18,9 @@ class User{
     }
     public greet(){
         return `Hello ${this.name}`
+    }
+    public printPhone(){
+        console.log(this.phone);
     }
 }
 const user: User = new User("Golu", "golu@gmail.com", 1234)
@@ -32,12 +36,12 @@ class Admin extends User{
     public printName(){
         console.log(this.name);
     }
-    protected printPhone(){
-        console.log(this.phone);
-    }
-    public useProtectedPhone(){
-        this.printPhone()
-    }
+    // protected printPhone(){
+    //     console.log(this.phone);
+    // }
+    // public useProtectedPhone(){
+    //     this.printPhone()
+    // }
 }
 
 const adminUser: Admin = new Admin("Abhinav", "abhinav@gmail.com", 8291, 3, "Gautam")
@@ -50,4 +54,5 @@ console.log(user.name);
 //protected members..!
 console.log("----");
 console.log("phone: ");
-adminUser.useProtectedPhone()
+// adminUser.useProtectedPhone()
+user.printPhone()
