@@ -5,10 +5,8 @@ class User {
     constructor(name, email, phone, lastName) {
         this.name = name;
         this.email = email;
+        this.lastName = lastName;
         this.phone = phone;
-        if (lastName) {
-            this.lastName = lastName;
-        }
     }
     greet() {
         return `Hello ${this.name}`;
@@ -19,6 +17,7 @@ class User {
 }
 const user = new User("Golu", "golu@gmail.com", 1234);
 console.log("User: ", user);
+console.log(user.greet());
 class Admin extends User {
     constructor(name, email, phone, userReporting, lastName) {
         super(name, email, phone, lastName);
@@ -27,6 +26,9 @@ class Admin extends User {
     }
     printName() {
         console.log(this.name);
+    }
+    greet() {
+        return `Hello ${this.name}. AdminAcount...!`;
     }
 }
 const adminUser = new Admin("Abhinav", "abhinav@gmail.com", 8291, 3, "Gautam");
@@ -40,3 +42,4 @@ console.log("----");
 console.log("phone: ");
 // adminUser.useProtectedPhone()
 user.printPhone();
+console.log(adminUser.greet());

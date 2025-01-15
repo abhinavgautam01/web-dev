@@ -2,21 +2,17 @@
 
 //by default public
 class User{
-    public name: string
-    readonly email: string
-    lastName?: string
     // protected phone: number
     private phone: number
 
-    constructor(name: string, email: string, phone:number, lastName?: string){
-        this.name = name
-        this.email = email
+    constructor(
+        public name: string,
+        readonly email: string,
+        phone:number,
+        public lastName?: string){
         this.phone = phone
-        if(lastName){
-            this.lastName = lastName
-        }
     }
-    public greet(){
+    public greet(): string{
         return `Hello ${this.name}`
     }
     public printPhone(){
@@ -25,6 +21,7 @@ class User{
 }
 const user: User = new User("Golu", "golu@gmail.com", 1234)
 console.log("User: ", user);
+console.log(user.greet());
 
 class Admin extends User{
     isAdmin: boolean = true
@@ -35,6 +32,9 @@ class Admin extends User{
     }
     public printName(){
         console.log(this.name);
+    }
+    public greet(): string{
+        return `Hello ${this.name}. AdminAcount...!`
     }
     // protected printPhone(){
     //     console.log(this.phone);
@@ -56,3 +56,4 @@ console.log("----");
 console.log("phone: ");
 // adminUser.useProtectedPhone()
 user.printPhone()
+console.log(adminUser.greet());
