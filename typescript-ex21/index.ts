@@ -14,11 +14,20 @@ class Person{
         this._age = age
     }
 
-    public fullName(){
+    //getter or accessor
+    public get age(){
+        if(this._age==undefined){
+            throw new Error("The age property is not defined..!")
+        }
+        return this._age
+    }
+
+    public get fullName(){
     return `${this.firstName} ${this.lastName}`
     }
 }
 const person: Person = new Person("Abhinav", "Gautam")
-console.log("person.fullName() :",person.fullName());
+console.log("person.fullName() :",person.fullName);
 person.age = 40
 console.log(person.age);
+//by using getter you can simply invoke function as another properties of class...
