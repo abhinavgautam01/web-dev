@@ -27,3 +27,23 @@ console.log("person.fullName() :", person.fullName);
 person.age = 40;
 console.log(person.age);
 //by using getter you can simply invoke function as another properties of class...
+console.log("------");
+//static members
+function loadInitialCount() {
+    console.log("loadInitialCount() is invoked...");
+    return 3;
+}
+class Counter {
+    static increment() {
+        Counter.count++; // this.count++ only with static method...
+    }
+}
+Counter.count = 0;
+(() => {
+    console.log("initializing Counter Class");
+    Counter.count = loadInitialCount();
+})();
+//static members don't belong to the instance of the class, they just belong to the class itself
+console.log("counter: ", Counter.count);
+Counter.increment();
+console.log("counter: ", Counter.count);
