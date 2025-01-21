@@ -25,3 +25,22 @@ const admin: Admin = new Admin("Golu", "golu@gmail.com", 1)
 const customer: Customer = new Customer("John", "john@gmail.com")
 Auth.login(admin)
 Auth.login(customer)
+interface Person{
+    name: string
+    age: number
+    email: string
+    phone: number
+}
+
+interface PersonWithAddress extends Person{
+    address: string
+}
+
+const personWithAddress: PersonWithAddress = {
+    address: "Kullu",
+    name: "Golu",
+    age: 20,
+    email: "golu@gmail.com",
+    phone: 1234
+}
+console.log("personWithAddress: ", personWithAddress);
