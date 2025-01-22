@@ -113,3 +113,16 @@ class Car {
 }
 const newFerrari = new Car(AutomobileBrand.ferrari, [AutomobileColors.red, AutomobileColors.black], "This is new ferrari");
 console.log("newFerrari:", newFerrari);
+class Truck {
+    constructor(brand, colors, description, capacity, licenseRenewalDate) {
+        this.brand = brand;
+        this.colors = colors;
+        this.description = description;
+        this.capacity = capacity;
+        this.licenseRenewalDate = licenseRenewalDate;
+        this.type = AutomobileTypes.truck;
+    }
+}
+const truck = new Truck(AutomobileBrand.toyota, [AutomobileColors.black, AutomobileColors.white, AutomobileColors.silver], "This is a toyota Truck..!", "15 Tonnes", new Date());
+console.log("---");
+console.log("Truck: ", truck);

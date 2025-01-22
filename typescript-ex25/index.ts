@@ -86,6 +86,10 @@ interface AutoMobile<Type, Brand, Colors> {
     colors: Colors[]
     description: string
 }
+interface CommercialVehicle{
+    capacity: string
+    licenseRenewalDate: Date
+}
 
 enum AutomobileTypes{
     car = "car",
@@ -144,3 +148,16 @@ class Car implements AutoMobile<string, AutomobileBrand, AutomobileColors>{
 const newFerrari: Car = new Car(AutomobileBrand.ferrari, [AutomobileColors.red, AutomobileColors.black], "This is new ferrari")
 console.log("newFerrari:", newFerrari);
 
+class Truck implements AutoMobile<AutomobileTypes, AutomobileBrand, AutomobileColors>, CommercialVehicle{
+    public type: AutomobileTypes = AutomobileTypes.truck
+    constructor(public brand: AutomobileBrand, 
+        public colors: AutomobileColors[], 
+        public description: string,
+        public capacity: string,
+        public licenseRenewalDate: Date
+    ){}
+}
+
+const truck: Truck = new Truck(AutomobileBrand.toyota, [AutomobileColors.black, AutomobileColors.white, AutomobileColors.silver], "This is a toyota Truck..!", "15 Tonnes", new Date())
+console.log("---");
+console.log("Truck: ", truck);
