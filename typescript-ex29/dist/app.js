@@ -64,5 +64,26 @@ __decorate([
     __metadata("design:type", Object),
     __metadata("design:paramtypes", [])
 ], Airplane.prototype, "aircraftModel", null);
-//for static method or property, you wil always get constructor as first argument in decorators
+function AddLocation(lat, long) {
+    return (classConstructor) => {
+        return class extends classConstructor {
+            constructor(...args) {
+                super(...args);
+                this.mapLocation = { lat, long };
+            }
+        };
+    };
+}
+let Person = class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+};
+Person = __decorate([
+    AddLocation(1.234, 1.876),
+    __metadata("design:paramtypes", [String, Number])
+], Person);
+const person = new Person("John", 20);
+console.log(person);
 //# sourceMappingURL=app.js.map
