@@ -4,19 +4,20 @@ if(AuthService.isLoggedIn()){
 }else{
     console.log("Login failed"); 
 }
-const numbers = {
+const numbersObject = {
     x: 10,
     y: {
         z:20,
     }
 }
-console.log((numbers));
-numbers.x = 11
-console.log((numbers));
+console.log((numbersObject));
+numbersObject.x = 11
+console.log((numbersObject));
 let firstNameField = document.getElementById("firstName")! as HTMLInputElement
 
 type Weekdays = "Mon" | "Tue" | "Wed" | "Thu" | "Fri"
 type Day = Weekdays | "Sat" | "Sun"
+console.log("------");
 
 //concept of totality
 function nextDayForAWeekDay(weekday: Weekdays): Day{
@@ -82,3 +83,76 @@ fetchUserDetails("John").then((res)=>{
 }).catch((err)=>{
     console.log(err);
 })
+
+type Events = {
+    id: number
+    date: Date
+    type: "indoor" | "outdoor"
+}
+
+type unionOfKeysOfEvents = keyof Events
+type Numeric = {
+    [key: number]: string
+}
+type NumericKeyOf = keyof Number
+
+let greeting = "Hello world"
+let firstName: typeof greeting
+
+const user1 =  {
+    name: "John",
+    age: 32
+}
+let tom: typeof user1
+tom = {
+    name: "Tom",
+    age: 22
+}
+let numbers = [1, 5, 6, 8, 10]
+
+let stringNumbers = numbers.map((each)=>each.toString())
+console.log("stringNumbers: ",stringNumbers);
+
+type NextDay = {
+    [W in Weekdays]: Day
+}
+let nextDay: NextDay = {
+    Mon: "Tue",
+    Tue: "Wed",
+    Wed: "Thu",
+    Thu: "Fri",
+    Fri: "Sat"
+}
+
+
+type Artist = {
+    id: number
+    name: string
+    bio: string
+}
+type MappedArtistForEdit = {
+    [Property in keyof Artist]?: Artist[Property]
+}&{id: number}
+
+const artist: Artist = {
+    id: 1,
+    name: "Justin",
+    bio: "Hey, I am Justin"
+}
+
+const editedAritst: MappedArtistForEdit = {
+    id: 1,
+    bio: "Hello, I am Justin"
+}
+
+interface Animal {
+    live: ()=> void
+}
+interface Dog extends Animal{
+    woof: ()=>void
+}
+type Example = Dog extends Animal ? string: number
+
+type isString<T> = T extends string ? true : false
+type A = isString<string>
+type B = isString<number>
