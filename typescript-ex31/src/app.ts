@@ -156,3 +156,36 @@ type Example = Dog extends Animal ? string: number
 type isString<T> = T extends string ? true : false
 type A = isString<string>
 type B = isString<number>
+
+interface WritePermissions{
+    write: true
+}
+interface ReadPermissions{
+    write: false
+}
+
+interface User {
+    id: number
+    name: string
+    email: string
+}
+
+interface Admin extends User, WritePermissions{}
+interface Author extends User, WritePermissions{}
+interface Reader extends User, ReadPermissions{}
+
+type FilterWriteable<T> = T extends{write: true}? true : false
+type Writable = FilterWriteable<Reader>
+
+type ArrayElementType<T> = T extends (infer E)[] ? E : T
+type TypeOne = ArrayElementType<string[]>
+type TypeTwo = ArrayElementType<number[]>
+type TypeThree = ArrayElementType<(number | string | boolean)[]>
+type TypeFour = ArrayElementType<{name: string}>
+type TypeFive = ArrayElementType<string>
+
+function returnString(){
+    return "string"
+}
+type FunctionReturnType<T> = T extends ()=> infer R ? R : T
+type newType = FunctionReturnType<typeof returnString>

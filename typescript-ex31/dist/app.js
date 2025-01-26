@@ -95,3 +95,6 @@ const editedAritst = {
     id: 1,
     bio: "Hello, I am Justin"
 };
+function returnString() {
+    return "string";
+}
