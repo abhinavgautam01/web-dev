@@ -98,3 +98,18 @@ const editedAritst = {
 function returnString() {
     return "string";
 }
+function person(name, age) {
+    return {
+        name: name,
+        age: age
+    };
+}
+const color = {
+    red: [255, 0, 0],
+    green: "#00ff00",
+    blue: [255, 255, 0]
+};
+const redComponent = color.red[0];
+console.log(redComponent);
+const greenValue = color.green.toUpperCase();
+console.log(greenValue);

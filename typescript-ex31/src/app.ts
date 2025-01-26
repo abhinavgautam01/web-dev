@@ -189,3 +189,28 @@ function returnString(){
 }
 type FunctionReturnType<T> = T extends ()=> infer R ? R : T
 type newType = FunctionReturnType<typeof returnString>
+
+function person(name: string, age: number){
+    return{
+        name: name,
+        age: age
+    }
+}
+type GetFirstArgumentOfAnyFunction<T> = T extends (first: infer FirstArgument, ...args: any[])=> any ? FirstArgument : never
+type GetSecondArgumentOfAnyFunction<T> = T extends (first: any, second: infer SecondArgument, ...args: any[])=> any ? SecondArgument : never
+type FirstArgument = GetFirstArgumentOfAnyFunction<typeof person>
+type SecondArgument = GetSecondArgumentOfAnyFunction<typeof person>
+
+
+type Properties = "red" | "green" | "blue"
+type RGB = [red: number, green: number, blue: number]
+const color = {
+    red: [255, 0, 0],
+    green: "#00ff00",
+    blue: [255, 255, 0]
+} satisfies Record<Properties, RGB | string>
+const redComponent = color.red[0]
+console.log(redComponent);
+
+const greenValue = color.green.toUpperCase()
+console.log(greenValue);
