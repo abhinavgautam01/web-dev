@@ -113,3 +113,36 @@ const redComponent = color.red[0];
 console.log(redComponent);
 const greenValue = color.green.toUpperCase();
 console.log(greenValue);
+const promise = new Promise((res, rej) => {
+    setTimeout(() => {
+        res("Done!");
+    }, 1000);
+});
+const article = {
+    title: "Title",
+    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus beatae nulla fuga.",
+    contributors: {
+        author: { name: "John", email: "john@email.com", age: 32 },
+        editor: { name: "Frank", email: "frank@email.com", age: 20 },
+        researcher: { name: "Mark", email: "mark@email.com", age: 23 },
+    }
+};
+const personOne = {
+    name: "Golu",
+    age: 20
+};
+const limitedUser = {
+    name: "John",
+    email: "john@gmail.com"
+};
+function updateUser(user, updates) {
+    return { ...user, ...updates };
+}
+const userPar = {
+    name: "John",
+    age: 20,
+    email: "test@email.com",
+    password: "password"
+};
+const updatedUser = updateUser(userPar, { password: "email@test.com" });
+//required utility type is opposite of Partial utility type

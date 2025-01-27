@@ -214,3 +214,84 @@ console.log(redComponent);
 
 const greenValue = color.green.toUpperCase()
 console.log(greenValue);
+
+type NewPartial<T> = {
+    [P in keyof T]?: T[P]
+}
+
+type NewExclude<T, U> = T extends U ? never: T
+
+const promise : Promise<string> = new Promise((res, rej)=>{
+    setTimeout(() => {
+        res("Done!")
+    }, 1000);
+})
+
+type AwaitedType = Awaited<typeof promise>
+
+type Roles = "author"|"editor"|"researcher"
+
+interface ArticleUser {
+    name: string
+    email: string
+    age: number
+}
+
+interface Article {
+    title: string
+    content: string
+    contributors: Record<Roles, ArticleUser>
+}
+
+const article: Article = {
+    title: "Title",
+    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus beatae nulla fuga.",
+
+    contributors: {
+        author: {name: "John", email: "john@email.com", age: 32},
+        editor: {name: "Frank", email: "frank@email.com", age: 20},
+        researcher: {name: "Mark", email: "mark@email.com", age: 23},
+    }
+}
+
+interface PersonPickUtility{
+    name: string
+    age: number
+    address: string
+}
+type NameAndAge = Readonly<Pick<PersonPickUtility, "name" | "age">>
+
+const personOne: NameAndAge= {
+    name: "Golu",
+    age: 20
+}
+
+// personOne.name = "else"
+// console.log(personOne.name);
+
+
+interface UserOmit {
+    name: string
+    age: number
+    email: string
+    password: string
+}
+
+type LimitedUser = Omit<UserOmit, "age"| "password">
+const limitedUser: LimitedUser = {
+    name: "John",
+    email: "john@gmail.com"
+}
+type PartialUser = Partial<UserOmit>
+function updateUser(user: UserOmit, updates: PartialUser): UserOmit{
+    return {...user, ...updates}
+}
+
+const userPar: UserOmit = {
+    name: "John",
+    age: 20,
+    email: "test@email.com",
+    password: "password"
+}
+const updatedUser = updateUser(userPar, {password: "email@test.com"})
+//required utility type is opposite of Partial utility type
