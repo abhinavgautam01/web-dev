@@ -60,18 +60,18 @@ usersRepository.add({
     name: "Gautam",
     email: "Gautam@gmail.com",
 })
-console.log("----");
+
 console.log("usersRepository.getAll(): ",usersRepository.getAll());
-console.log("----");
+
 console.log("usersRepository.getById(1): ",usersRepository.getById(1));
 
-console.log("----");
+
 usersRepository.removeById(3)
 console.log("usersRepository.getAll(): ",usersRepository.getAll());
-console.log("----");
+
 const booksRepository = new Repository<Book>()
 booksRepository.add({
-    id:1,
+    id: 1,
     title: "Harry Potter",
     ISBN: 1234
 })
