@@ -121,10 +121,6 @@ app.get("/balance/:userId", (req, res) => {
   res.json({ balances: user.balances });
 })
 
-app.get("/quote", (req, res) => {
-  // TODO: Assignment
-});
-
 function flipBalance(userId1: string, userId2: string, quantity: number, price: number) {
   let user1 = users.find(x => x.id === userId1);
   let user2 = users.find(x => x.id === userId2);
