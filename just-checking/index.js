@@ -138,3 +138,22 @@ class Promise2 {
     this.resolve = callback;
   }
 }
+
+function promisified(duration){
+    return new Promise(function(resolve){
+        setTimeout(resolve, duration)
+    })
+}
+
+async function solve(){
+    await promisified(1000);
+    console.log("abc")
+    await promisified(2000);
+    console.log("ghi")
+    await promisified(4000);
+    console.log("def")
+}
+
+solve()
+
+console.log("After calling solve function ...!")
