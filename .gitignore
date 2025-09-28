@@ -1,0 +1,59 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Solana keypairs
+*.json
+!.anchor
+!.vscode
+!package.json
+!**/package.json
+
+# Anchor build artifacts
+target/
+**/target/
+*.log
+
+# Solana program build files
+*.so
+*.dSYM/
+.vscode/
+.DS_Store
+
+# TypeScript
+dist/
+out/
+build/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# Test coverage
+coverage/
+
+# Dialect/Actions temp files
+.cache/
+.solana/
+
+# Next.js or Vercel output (if using)
+.next/
+.vercel/
+
+test-ledger/
+test-ledger
