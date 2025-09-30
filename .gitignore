@@ -11,6 +11,7 @@ node_modules/
 !.anchor
 !.vscode
 !package.json
+!package-lock.json
 !**/package.json
 
 # Anchor build artifacts
