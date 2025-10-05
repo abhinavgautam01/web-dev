@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const { z } = require("zod");
 
 mongoose.connect(
-  "mongodb+srv://Abhinav:8nrTtViVDDj0wa2Q@cluster0.3dreo8i.mongodb.net/todo_application"
+  "enter_connection_url"
 );
 
 app.post("/signup", async (req, res) => {
