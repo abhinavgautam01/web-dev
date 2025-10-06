@@ -9,6 +9,7 @@ const { coursesRouter } = require("./routes/courses")
 const { adminRouter } = require("./routes/admin")
 
 const app = express()
+app.use(express.json())
 
 app.use("/api/v1/users", userRouter)
 app.use("/apiv1/admin", adminRouter)
