@@ -12,7 +12,7 @@ const app = express()
 app.use(express.json())
 
 app.use("/api/v1/users", userRouter)
-app.use("/apiv1/admin", adminRouter)
+app.use("/api/v1/admin", adminRouter)
 app.use("/api/v1/courses", coursesRouter)
 
 async function main(){

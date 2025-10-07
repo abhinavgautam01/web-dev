@@ -1,7 +1,11 @@
 const { Router } = require("express")
-const { AdminModel } = require("../db")
+const { AdminModel, CourseModel } = require("../db")
 const adminRouter = Router()
-
+const jwt = require("jsonwebtoken")
+const { JWT_ADMIN_PASSWORD } = require("../config")
+const bcrypt = require("bcrypt")
+const { z } = require("zod")
+const { adminMiddleware } = require("../middleware/admin")
 adminRouter.post("/signup", async (req, res)=>{
      const data = z.object({
         email: z.email(),
@@ -40,15 +44,22 @@ adminRouter.post("/signin", async (req, res)=>{
     if(parseData.success){
         const admin = await AdminModel.findOne({
             email: parseData.data.email,
-            password: parseData.data.password
         })
         if(admin){
-            const token = jwt.sign({
-                adminID: admin._id
-            }, JWT_USER_PASSWORD)
-            res.json({
-                token: token
-            })       
+            const password = admin.password
+            const hashedPassword = await bcrypt.compare(parseData.data.password, password)
+            if(hashedPassword){
+                const token = jwt.sign({
+                    adminId: admin._id
+                }, JWT_ADMIN_PASSWORD)
+                res.json({
+                    token: token
+                })       
+            }else {
+                res.status(403).json({
+                    message: "Wrong password"
+                })
+            }
         }else {
             res.status(403).json({
                 message: "Invalid Admin Credentials"
@@ -62,8 +73,22 @@ adminRouter.post("/signin", async (req, res)=>{
         })
     }
 })
-adminRouter.post("/course", (req, res)=>{
+adminRouter.post("/course", adminMiddleware, async (req, res)=>{
+    const adminId = req.adminId;
+    const { title, description, price, imageURL } = req.body
 
+    const course = await CourseModel.create({
+        title: title,
+        description: description,
+        price: price,
+        imageURL: imageURL,
+        creatorId: adminId
+    })
+
+    res.json({
+        message: "Course Created Successfully",
+        courseId: course._id
+    })
 })
 adminRouter.put("/course", (req, res)=>{
 

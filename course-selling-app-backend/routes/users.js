@@ -4,7 +4,7 @@ const userRouter = Router()
 const bcrypt = require("bcrypt")
 const { UserModel } = require("../db")
 const jwt = require("jsonwebtoken")
-const JWT_USER_PASSWORD = "thisisuserssecret"
+const { JWT_USER_PASSWORD } = require("../config")
 
 userRouter.post("/signup", async (req, res)=>{
     const data = z.object({
@@ -45,15 +45,22 @@ userRouter.post("/signin", async (req, res)=>{
     if(parseData.success){
         const user = await UserModel.findOne({
             email: parseData.data.email,
-            password: parseData.data.password
         })
         if(user){
-            const token = jwt.sign({
-                userID: user._id
-            }, JWT_USER_PASSWORD)
-            res.json({
-                token: token
-            })       
+            const password = user.password;
+            const hashedPassword = await bcrypt.compare(parseData.data.password, password)
+            if(hashedPassword){
+                const token = jwt.sign({
+                    userId: user._id
+                }, JWT_USER_PASSWORD)
+                res.json({
+                    token: token
+                })       
+            }else {
+                res.status(403).json({
+                    message: "Wrong password"
+                })
+            }
         }else {
             res.status(403).json({
                 message: "Invalid User Credentials"
