@@ -85,16 +85,65 @@ adminRouter.post("/course", adminMiddleware, async (req, res)=>{
         creatorId: adminId
     })
 
+    if(!course){
+        return res.status(403).json({
+            message: "Course Creation Failed..!"
+        })
+    }
+
     res.json({
         message: "Course Created Successfully",
         courseId: course._id
     })
 })
-adminRouter.put("/course", (req, res)=>{
+adminRouter.put("/course", adminMiddleware, async (req, res)=>{
+    const adminId = req.adminId;
+    const { title, description, price, imageURL, courseId } = req.body
 
+    try{
+        const course = await CourseModel.updateOne({
+            _id: courseId,
+            creatorId: adminId
+        }, {
+            title: title,
+            description: description,
+            price: price,
+            imageURL :imageURL
+        })
+
+        if (course.matchedCount === 0) {
+            return res.status(403).json({
+                message: "You are not allowed to update another admin's course",
+            });
+        }
+
+        if (course.modifiedCount === 0) {
+            return res.status(400).json({
+                message: "No changes made or course not found",
+            });
+        }
+      
+        res.json({
+            message: "Course Updated",
+            courseId: course._id
+        })
+    }
+    catch(e){
+        res.json({
+            message: "Coudn't update other admin's Course"
+        })
+    }
 })
-adminRouter.get("/course/bulk", (req, res)=>{
-
+adminRouter.get("/course/bulk", adminMiddleware, async (req, res)=>{
+    const adminId = req.adminId;
+    const courses = await CourseModel.find({
+        creatorId: adminId
+    })
+    
+    res.json({
+        courses: courses
+    })
+    
 })
 
 module.exports = {
