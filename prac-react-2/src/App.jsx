@@ -25,6 +25,19 @@ function App() {
               />
             </div>
             )}
+            <div style={{display: "flex", background: "gray"}}>
+              <Card>
+                <div style={{ color: "green" }}>What do you want to post
+                  <br/>
+                  <br/>
+                  <input type='text' style={{background: "white", color: "black"}} />
+                  <button style={{marginLeft: 4, background: "lightblue"}}>Post</button> 
+                </div>
+              </Card>
+              <Card>
+                hi there
+              </Card>
+            </div>
       </div>
     </>
   )
@@ -45,6 +58,14 @@ function PostComponent(props) {
     </div>
     </div>
   </div>)
+}
+
+function Card({children}){
+  return (
+    <div style={{background: "white", borderRadius: 10, color: "black", padding: 10, margin: 10}}>
+      {children}
+    </div>
+  )
 }
 
 export default App
