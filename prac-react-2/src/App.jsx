@@ -25,19 +25,16 @@ function App() {
               />
             </div>
             )}
-            <div style={{display: "flex", background: "gray"}}>
-              <Card>
-                <div style={{ color: "green" }}>What do you want to post
-                  <br/>
-                  <br/>
-                  <input type='text' style={{background: "white", color: "black"}} />
-                  <button style={{marginLeft: 4, background: "lightblue"}}>Post</button> 
-                </div>
-              </Card>
-              <Card>
-                hi there
-              </Card>
-            </div>
+            <div>
+            <Card>
+                <h2>Card Title</h2>
+                <p>This is some content inside the card.</p>
+            </Card>
+            <Card>
+                <h2>Another Card</h2>
+                <p>This card has different content!</p>
+            </Card>
+        </div>
       </div>
     </>
   )
@@ -59,13 +56,19 @@ function PostComponent(props) {
     </div>
   </div>)
 }
+const Card = ({ children }) => {
+    return (
+        <div style={{
+            border: '1px solid #ccc',
+            borderRadius: '5px',
+            padding: '20px',
+            margin: '10px',
+            boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
+        }}>
+            {children}
+        </div>
+    );
+};
 
-function Card({children}){
-  return (
-    <div style={{background: "white", borderRadius: 10, color: "black", padding: 10, margin: 10}}>
-      {children}
-    </div>
-  )
-}
 
-export default App
+export default App;
