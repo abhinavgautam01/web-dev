@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 
 function App() {
@@ -35,6 +35,11 @@ function App() {
                 <p>This card has different content!</p>
             </Card>
         </div>
+        <div>
+          <ErrorBoundary>
+            <BuggyComponent />
+        </ErrorBoundary>
+        </div>
       </div>
     </>
   )
@@ -69,6 +74,38 @@ const Card = ({ children }) => {
         </div>
     );
 };
+
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { hasError: false };
+    }
+
+    static getDerivedStateFromError(error) {
+        return { hasError: true };
+    }
+
+    componentDidCatch(error, info) {
+        console.error("Error caught:", error, info);
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return <h1>Something went wrong.</h1>;
+        }
+
+        return this.props.children; 
+    }
+}
+
+const BuggyComponent = () => {
+    // throw new Error("I crashed!");
+    return <div>
+      This is the buggy component
+    </div>
+};
+
+        
 
 
 export default App;
