@@ -12,6 +12,7 @@ function App() {
     }])
   }
   return (
+    // react fragment ...<></>...or import Fragment from react
     <>
       <div>
         <button onClick={addPost} style={{marginBottom: 4}}>Add Post</button>
