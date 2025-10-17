@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from "react-r
 import './App.css'
 
 function App() {
-
+  // routes...
   return (
     <>
       <BrowserRouter>
