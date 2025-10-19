@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from "react-router-dom"
 import './App.css'
 import { useRef } from "react";
+import { useState } from "react";
 
 function App() {
   // routes...
@@ -11,7 +12,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="/route_one" element={<RouteOne />} />
             <Route path="/route_two" element={<RouteTwo />} />
-            <Route path="/" element={<>{/*<LandingPage />*/} <FocusInput/></>} />
+            <Route path="/" element={<>{/*<LandingPage /> <FocusInput/>*/} <Clock/></>} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
@@ -37,6 +38,27 @@ function FocusInput() {
       <button onClick={handleFocus}>Focus the input</button>
     </div>
   );
+}
+
+function Clock() {
+  const [currentCount, setCurrentCount] = useState(0)
+  let timer = useRef()
+  function startClock(){
+    let value = setInterval(function(){
+      setCurrentCount(c=> c +1)
+    }, 1000)
+    timer.current = value
+  }
+  function stopClock(){
+    clearInterval(timer.current)
+  }
+  return (
+    <div>
+      <button onClick={startClock}>Start</button>
+      {currentCount}
+      <button onClick={stopClock}>Stop</button>
+    </div>
+  )
 }
 
 function Layout (){
