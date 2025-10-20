@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from "react-r
 import './App.css'
 import { useRef } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 
 function App() {
   // routes...
@@ -12,7 +13,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="/route_one" element={<RouteOne />} />
             <Route path="/route_two" element={<RouteTwo />} />
-            <Route path="/" element={<>{/*<LandingPage /> <FocusInput/>*/} <Clock/></>} />
+            <Route path="/" element={<>{/*<LandingPage /> <FocusInput/>*/} <Clock/><Chat/></>} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
@@ -41,24 +42,55 @@ function FocusInput() {
 }
 
 function Clock() {
+  const [disable, setDisable] = useState(false)
   const [currentCount, setCurrentCount] = useState(0)
   let timer = useRef()
   function startClock(){
+    setDisable(true);
     let value = setInterval(function(){
       setCurrentCount(c=> c +1)
     }, 1000)
     timer.current = value
   }
   function stopClock(){
+    setDisable(!disable);
     clearInterval(timer.current)
   }
   return (
     <div>
-      <button onClick={startClock}>Start</button>
+      <button disabled={disable} onClick={startClock}>Start</button>
       {currentCount}
-      <button onClick={stopClock}>Stop</button>
+      <button disabled={!disable} onClick={stopClock}>Stop</button>
     </div>
   )
+}
+function Chat() {
+  const [messages, setMessages] = useState(["Hello!", "How are you?"]);
+  const chatBoxRef = useRef(null);
+
+  // Function to simulate adding new messages
+  const addMessage = () => {
+    setMessages((prevMessages) => [...prevMessages, "New message!"]);
+  };
+
+  // Scroll to the bottom whenever a new message is added
+  useEffect(() => {
+    chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+  }, [messages]);
+
+  return (
+    <div>
+      <div 
+        ref={chatBoxRef} 
+        style={{ height: "200px", overflowY: "scroll", border: "1px solid black" }}
+      >
+        {messages.map((msg, index) => (
+          <div key={index}>{msg}</div>
+        ))}
+      </div>
+      <button onClick={addMessage}>Add Message</button>
+    </div>
+  );
 }
 
 function Layout (){
