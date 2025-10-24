@@ -15,6 +15,17 @@ function useCounter() {
 }
 
 function App() {
+  return (
+    <div>
+      <Counter />
+      <Counter />
+      <Counter />
+      <Counter />
+    </div>
+  )
+}
+
+function Counter() {
   const {count, increase_count} = useCounter()
   return (
     <div>
@@ -24,6 +35,7 @@ function App() {
       <button onClick={increase_count}>Increase_Count</button>
     </div>
   )
+  
 }
 
 export default App
