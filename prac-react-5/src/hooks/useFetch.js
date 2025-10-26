@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 // export function usePost(){
 //     const [post, setPost] = useState({})
     
@@ -13,24 +13,66 @@ import { useState, useEffect } from "react";
 //     return post;
 // }
 
-export function useFetch(url){
-    const [finalData, setFinalData] = useState({})
-    const [loading, setLoading] = useState(true)
+export function useCounter() {
+  const [count, setCount] = useState(0)
 
-    async function getDetails(){
+  function increase_count(){
+    setCount(count + 1);
+  }
+
+  return {
+    count,
+    increase_count
+  }
+}
+
+export function useFetch(url, retryTime) {
+  const [finalData, setFinalData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // stable fetch function that always sees the latest `url`
+  const fetchData = useCallback(async (showLoading = false) => {
+    if (showLoading) {
         setLoading(true);
-        const response = await fetch(url);
-        const json = await response.json()
-        setFinalData(json)
+    }
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+      setFinalData(json);
+    } catch (err) {
+      console.error("useFetch error:", err);
+    } finally {
+      if (showLoading) {
         setLoading(false);
+      }
     }
+  }, [url]);
 
-    useEffect(()=> {
-        getDetails();
-    }, [url])
+  // initial fetch when url changes (show loading)
+  useEffect(() => {
+    fetchData(true);
+  }, [fetchData]);
 
-    return {
-        finalData, 
-        loading
-    }
+  // polling effect — depends on url & retryTime so it updates when either changes
+  useEffect(() => {
+    if (!retryTime || retryTime <= 0) return;
+
+    const id = setInterval(() => {
+      // do background poll (don't toggle loading)
+      fetchData(false);
+    }, retryTime * 1000);
+
+    return () => clearInterval(id); // cleanup on url/retryTime change or unmount
+  }, [fetchData, retryTime]);
+
+  return { finalData, loading };
+}
+// effect occurs after returning the value...!
+export function usePrev(value){
+    const prev = useRef()
+
+    useEffect(()=>{
+        prev.current = value
+    }, [value])
+    return prev.current;
 }
