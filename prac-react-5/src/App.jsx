@@ -1,15 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import { useCounter, useFetch, usePrev, } from './hooks/useFetch';
+import { useCounter, useDebounce, useDebounceSecondImplementation, useFetch, usePrev, } from './hooks/useFetch';
 
 function App() {
   return (
     <div>
       <Post />
+      <DebouncedComponentTwo />
       <Counter />
       {/* <Counter />
       <Counter />
       <Counter /> */}
+      <DebouncedComponent/>
     </div>
   )
 }
@@ -54,6 +56,37 @@ function Counter() {
     </div>
   )
   
+}
+
+function DebouncedComponent(){
+  function sendBackendCall(){
+    fetch("api.amazon.com/search")
+  }
+  const debounceFn = useDebounce(sendBackendCall)
+  return (
+  <div>
+    <input type='text' onChange={debounceFn}/>
+  </div>
+  )
+}
+function DebouncedComponentTwo(){
+  const [inputVal, setInputVal] = useState()
+  
+  const debouncedValue = useDebounceSecondImplementation(inputVal, 300)
+
+  function change(e){
+    setInputVal(e.target.value);
+  }
+
+  useEffect(()=>{
+    console.log("expensive Operation called..!")
+  }, [debouncedValue])
+
+  return (
+  <div>
+    <input type='text' onChange={change}/>
+  </div>
+  )
 }
 
 export default App

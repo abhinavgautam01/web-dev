@@ -76,3 +76,30 @@ export function usePrev(value){
     }, [value])
     return prev.current;
 }
+
+export function useDebounce(de_bounce_function){
+    const currentClock = useRef()
+
+    const debouncedfn = ()=> {
+        clearTimeout(currentClock.current);
+        currentClock.current = setTimeout(de_bounce_function, 300)
+    }
+
+    return debouncedfn
+}
+
+export function useDebounceSecondImplementation(value, delay){
+    const [debouncedValue, setDebouncedValue] = useState();
+
+    useEffect(()=>{
+        const handler = setTimeout(()=>{
+            setDebouncedValue(value);
+        }, delay)
+
+        return ()=>{
+            clearTimeout(handler)
+        };
+    }, [value, delay])
+
+    return debouncedValue;
+}
