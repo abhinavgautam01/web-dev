@@ -12,14 +12,25 @@ app.post("/api/v1/signup", async (req, res)=>{
     const password = req.body.password;
 
     try{
-        await UserModel.create({
-            username: username,
-            password: password
+        const user = await UserModel.find({
+            username: username
         })
-    
-        res.status(200).json({
-            message: "User SignedUp Successfully"
-        })
+        if(!user){
+            await UserModel.create({
+                username: username,
+                password: password
+            })
+        
+            res.status(200).json({
+                message: "User SignedUp Successfully"
+            })
+            
+        }
+        else {
+            res.status(401).json({
+                message: "User already exist."
+            })
+        }
     } catch(e) {
         res.status(411).json({
             message: "User already exist"
