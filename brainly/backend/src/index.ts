@@ -1,6 +1,7 @@
 import express from "express"
 import { UserModel } from "./db.js";
 import dotenv from "dotenv"
+import jwt from "jsonwebtoken"
 dotenv.config()
 const app = express()
 app.use(express.json())
@@ -37,8 +38,29 @@ app.post("/api/v1/signup", async (req, res)=>{
         })
     }
 })
-app.post("/api/v1/signin", (req, res)=>{
-    
+app.post("/api/v1/signin", async(req, res)=>{
+const username = req.body.username
+    const password = req.body.password
+
+    const user = await UserModel.find({
+        username: username,
+        password: password
+    })
+    console.log(user)
+    if(user.length == 1){
+        const token = jwt.sign({
+            username: username
+        }, process.env.JWT_SECRET!)
+
+        res.json({
+            token: token
+        })
+    }else {
+        res.status(403).json({
+            message: "Invalid Username or password..!"
+        })
+    }
+  
 })
 app.post("/api/v1/content", (req, res)=>{
 
