@@ -16,20 +16,20 @@ const Tags = new Schema({
 
 const Links = new Schema({
     hash: {type: String, required: true},
-    user_id: {type: ObjectId, ref: "User", required: true}
+    user_id: {type: ObjectId, ref: "users", required: true}
 })
 
-const contentTypes = ["image", "video", "audio", "article"]
+const contentTypes = ["text", "image", "video", "audio", "article"]
 
 const Content = new Schema({
     link: {type: String, required: true},
     type: {type: String, enum: contentTypes, required: true},
     title: {type: String, required: true},
-    tags: [{type: ObjectId, ref: "Tags"}],
-    user_id: {type: ObjectId, ref: "User"}
+    tags: [{type: ObjectId, ref: "tags"}],
+    user_id: {type: ObjectId, ref: "users"}
 })
 
-export const UserModel = model("user", User);
+export const UserModel = model("users", User);
 export const TagsModel = model("tags", Tags);
 export const LinksModel = model("links", Links);
 export const ContentModel = model("content", Content);
