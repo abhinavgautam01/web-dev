@@ -13,7 +13,6 @@ export const userMiddleware = (req: Request, res: Response, next: NextFunction) 
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload
 
     if(decoded){
-        // @ts-ignore
         req.user_id = decoded.id;
         next()
     }else {

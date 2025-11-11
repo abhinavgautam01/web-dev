@@ -1,4 +1,12 @@
 import express from "express"
+declare global {
+    namespace Express {
+        export interface Request {
+            user_id?: string
+        }
+    }
+}
+
 import { ContentModel, UserModel } from "./db.js";
 import dotenv from "dotenv"
 import jwt from "jsonwebtoken"
@@ -66,8 +74,6 @@ app.post("/api/v1/content", userMiddleware, async(req, res)=>{
     const link = req.body.link
     const type = req.body.type
     const title = req.body.title
-    // @ts-ignore
-    console.log("log2", req.user_id)
 
     try {
         await ContentModel.create({
@@ -75,7 +81,6 @@ app.post("/api/v1/content", userMiddleware, async(req, res)=>{
             type: type,
             title: title,
             tags: [],
-            // @ts-ignore
             user_id: req.user_id
         })
         res.json({
@@ -89,7 +94,6 @@ app.post("/api/v1/content", userMiddleware, async(req, res)=>{
 
 })
 app.get("/api/v1/content", userMiddleware, async(req, res)=>{
-    // @ts-ignore
     const user_id = req.user_id
     try{
         const content = await ContentModel.find({
@@ -121,7 +125,6 @@ app.delete("/api/v1/content", userMiddleware, async(req, res)=>{
     try{
         await ContentModel.deleteOne({
             _id: content_id,
-            // @ts-ignore
             user_id: req.user_id
         })
         res.json({
