@@ -16,7 +16,7 @@ const Tags = new Schema({
 
 const Links = new Schema({
     hash: {type: String, required: true},
-    user_id: {type: ObjectId, ref: "users", required: true}
+    user_id: {type: ObjectId, ref: "users", required: true, unique: true}
 })
 
 const contentTypes = ["text", "image", "video", "audio", "article"]
