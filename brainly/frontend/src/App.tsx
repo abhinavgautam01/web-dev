@@ -1,15 +1,25 @@
-import './App.css'
-import { Button } from './components/Button'
-import { PlusIcon } from './icons/PlusIcon'
+import "./App.css";
+import { Button } from "./components/Button";
+import { PlusIcon } from "./icons/PlusIcon";
+import { ShareIcon } from "./icons/ShareIcon";
 
 function App() {
- 
-  return ( 
+  return (
     <>
-      <Button variant='primary' text='Share' size='md' onClick={()=>console.log("onClick prop")} startIcon={<PlusIcon size='md'/>}/>
-      <Button variant='secondary' text='Add Content' size='md' onClick={()=>console.log("onClick prop")}/>
+      <div>
+        <Button
+          variant="primary"
+          text="Share Brain"
+          startIcon={<ShareIcon size="md" />}
+        />
+        <Button
+          variant="secondary"
+          text="Add Content"
+          startIcon={<PlusIcon size="md" />}
+        />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
