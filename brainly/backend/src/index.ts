@@ -7,6 +7,7 @@ declare global {
     }
 }
 
+import cors from "cors"
 import { ContentModel, LinksModel, UserModel } from "./db.js";
 import dotenv from "dotenv"
 import jwt from "jsonwebtoken"
@@ -15,6 +16,7 @@ import { random } from "./utils.js";
 dotenv.config()
 const app = express()
 app.use(express.json())
+app.use(cors())
 app.post("/api/v1/signup", async (req, res)=>{
 
     // todo: zod Validation, hash password
