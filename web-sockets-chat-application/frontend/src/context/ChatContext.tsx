@@ -9,7 +9,9 @@ interface ChatProviderProps {
 
 export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [username, setUsername] = useState<string>("");
-
+  
+  const [myUserId, setMyUserId] = useState<string | null>(null); 
+  
   const [latestServerMessage, setLatestServerMessage] =
     useState<ServerResponse | null>(null);
   const ws = useRef<WebSocket | null>(null);
@@ -20,11 +22,11 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const connectWebSocket = (retryCount = 0) => {
     if (ws.current) return;
 
+    
     ws.current = new WebSocket("ws://localhost:8080");
 
     ws.current.onopen = () => {
       console.log("WebSocket connected from Context.");
-
       retryCount = 0;
     };
 
@@ -49,7 +51,6 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
 
     ws.current.onerror = (error) => {
       console.error("WebSocket Error in Context:", error);
-
       ws.current?.close();
     };
 
@@ -75,6 +76,15 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       }
 
       if (data) {
+        
+        if (
+          (data.type === "host_success" || data.type === "join_success") &&
+          data.payload.userId
+        ) {
+          console.log("Setting myUserId:", data.payload.userId);
+          setMyUserId(data.payload.userId);
+        }
+
         setLatestServerMessage(data);
       }
     };
@@ -111,11 +121,11 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
         ws,
         username,
         setUsername,
+        myUserId, 
+        setMyUserId, 
         sendMessage,
         latestServerMessage,
-        setLatestServerMessage: setLatestServerMessage as (
-          msg: ServerResponse
-        ) => void,
+        setLatestServerMessage,
       }}
     >
       {children}

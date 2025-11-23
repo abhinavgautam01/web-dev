@@ -6,15 +6,16 @@ export type ServerResponse =
       type: "host_success" | "join_success";
       payload: {
         room_id: string;
+        userId: string;
         username?: string;
         message?: string;
       };
     }
   | {
-      type: "chat_message";
+      type: "chat";
       payload: {
-        room_id: string;
         username: string;
+        userId: string;
         message: string;
       };
     }
@@ -25,17 +26,38 @@ export type ServerResponse =
       };
     }
   | {
+      type: "room_users";
+      payload: {
+        users: { username: string; userId: string }[];
+      };
+    }
+  | {
+      type: "user_joined";
+      payload: {
+        username: string;
+        userId: string;
+      };
+    }
+  | {
+      type: "user_left";
+      payload: {
+        username: string;
+        userId: string;
+      };
+    }
+  | {
       type: "error";
       payload: {
         message: string;
       };
-    }
-    |
-    null;
+    };
+
 export interface ChatContextType {
   ws: RefObject<WebSocket | null>;
   username: string;
   setUsername: (name: string) => void;
+  myUserId: string | null;
+  setMyUserId: (id: string | null) => void;
   sendMessage: (message: MessagePayload) => boolean;
   latestServerMessage: ServerResponse | null;
   setLatestServerMessage: (msg: ServerResponse) => void;
