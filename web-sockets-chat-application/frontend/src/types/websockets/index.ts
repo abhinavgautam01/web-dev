@@ -50,7 +50,8 @@ export type ServerResponse =
       payload: {
         message: string;
       };
-    };
+    }
+    | null
 
 export interface ChatContextType {
   ws: RefObject<WebSocket | null>;

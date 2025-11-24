@@ -40,7 +40,7 @@ export const RoomPage = () => {
     sendMessage,
     latestServerMessage,
     setLatestServerMessage,
-    logout,
+    myUserId,
   } = useContext(ChatContext);
 
   const [chatHistory, setChatHistory] = useState<Message[]>([]);
@@ -60,9 +60,10 @@ export const RoomPage = () => {
     return user === username ? "cyan" : "emerald";
   };
 
-  const sortUsers = (users: UserStatus[]) => {
-    return users.sort((a, b) => (a.username === username ? -1 : 1));
-  };
+  const sortUsers = (users: UserStatus[]) =>
+    users.sort((a, b) =>
+      a.username === username ? -1 : b.username === username ? 1 : 0
+    );
 
   useEffect(() => {
     if (!latestServerMessage) return;
@@ -84,7 +85,7 @@ export const RoomPage = () => {
         setChatHistory((prev) => [...prev, newMessage]);
       } else if (type === "room_users") {
         const userList: UserStatus[] = payload.users.map(
-          (u: { username: string; userId: string }) => ({
+          (u): UserStatus => ({
             username: u.username,
             status: "connected",
             color: getUserColor(u.username),
@@ -96,14 +97,13 @@ export const RoomPage = () => {
           payload.username &&
           !activeUsers.some((u) => u.username === payload.username)
         ) {
-          setActiveUsers((prev) => {
-            const newUser = {
-              username: payload.username,
-              status: "connected",
-              color: getUserColor(payload.username),
-            };
-            return sortUsers([...prev, newUser]);
-          });
+          const newUser: UserStatus = {
+            username: payload.username,
+            status: "connected",
+            color: getUserColor(payload.username),
+          };
+
+          setActiveUsers((prev) => sortUsers([...prev, newUser]));
 
           setChatHistory((prev) => [
             ...prev,
@@ -161,6 +161,7 @@ export const RoomPage = () => {
         room_id: room_id,
         username: username,
         message: inputMessage.trim(),
+        userId: myUserId!,
       },
     });
 
@@ -173,7 +174,6 @@ export const RoomPage = () => {
   };
 
   const handleLogout = () => {
-    logout();
     navigate("/");
   };
 
