@@ -215,14 +215,14 @@ export const RoomPage = () => {
       <div className="hidden md:flex flex-col w-72 z-10 border-r border-cyan-500/10 bg-[#0f172a]/40 backdrop-blur-xl">
         <div className="p-6 border-b border-cyan-500/10">
           <div className="flex items-center gap-3 mb-1">
-            <div className="relative p-2 rounded-lg bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 border border-cyan-500/30 group">
+            <div className="relative p-2 rounded-lg bg-linear-to-br from-cyan-500/20 to-emerald-500/20 border border-cyan-500/30 group">
               <Activity
                 size={20}
                 className="text-cyan-400 group-hover:animate-pulse"
               />
               <div className="absolute inset-0 bg-cyan-400/20 blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <span className="font-bold text-lg tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+            <span className="font-bold text-lg tracking-wide text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-emerald-400">
               NEXUS LINK
             </span>
           </div>
@@ -391,7 +391,7 @@ export const RoomPage = () => {
         <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
           {chatHistory.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center opacity-40 select-none pointer-events-none">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-b from-cyan-500/20 to-transparent flex items-center justify-center mb-6 border border-cyan-500/20 shadow-[0_0_30px_-10px_rgba(6,182,212,0.5)]">
+              <div className="w-24 h-24 rounded-full bg-linear-to-b from-cyan-500/20 to-transparent flex items-center justify-center mb-6 border border-cyan-500/20 shadow-[0_0_30px_-10px_rgba(6,182,212,0.5)]">
                 <Radio size={40} className="text-cyan-400 animate-pulse" />
               </div>
               <h3 className="text-xl font-light text-cyan-100 tracking-widest uppercase">
@@ -442,7 +442,7 @@ export const RoomPage = () => {
                       relative px-5 py-3 text-sm md:text-base leading-relaxed group
                       ${
                         msg.isSelf
-                          ? "bg-gradient-to-br from-cyan-600 to-blue-700 text-white rounded-2xl rounded-tr-sm shadow-[0_4px_20px_-5px_rgba(8,145,178,0.4)]"
+                          ? "bg-linear-to-br from-cyan-600 to-blue-700 text-white rounded-2xl rounded-tr-sm shadow-[0_4px_20px_-5px_rgba(8,145,178,0.4)]"
                           : msg.username === "SYSTEM"
                           ? "bg-slate-900/90 text-slate-400 border border-emerald-500/30 rounded-lg backdrop-blur-md italic text-center text-xs w-full"
                           : "bg-slate-800/80 text-slate-200 border border-slate-700 rounded-2xl rounded-tl-sm backdrop-blur-md hover:border-cyan-500/30 transition-colors"
@@ -462,7 +462,7 @@ export const RoomPage = () => {
         <div className="p-4 md:p-6 relative z-20">
           <div className="max-w-4xl mx-auto relative group">
             {/* Glowing border container with focus interaction */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 via-emerald-500 to-cyan-500 rounded-xl opacity-30 blur transition duration-500 group-focus-within:opacity-70 group-focus-within:blur-md"></div>
+            <div className="absolute -inset-0.5 bg-linear-to-r from-cyan-500 via-emerald-500 to-cyan-500 rounded-xl opacity-30 blur transition duration-500 group-focus-within:opacity-70 group-focus-within:blur-md"></div>
 
             <form
               onSubmit={handleSendMessage}
