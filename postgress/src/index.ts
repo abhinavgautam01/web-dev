@@ -19,10 +19,18 @@ app.post("/signup", async (req, res)=>{
     let email = req.body.email
     let password = req.body.password
 
-    const query = `INSERT INTO users (username, email, password) VALUES ($1, $2, $3);`
-    console.log("query: ", query)
+    const city = req.body.city
+    const country = req.body.country
+    const street = req.body.street
+    const pincode = req.body.pincode
+
+    const query = `INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id;`
+    const address_query = `INSERT INTO addresses (user_id, city, country, street, pincode) VALUES ($1, $2, $3, $4, $5);`
+
     try {
-        await client.query(query, [username, email, password]);
+        const response = await client.query(query, [username, email, password]);
+        const user_id = response.rows[0].id
+        await client.query(address_query, [user_id, city, country, street, pincode])
         console.log("done")
         res.json({
             message: "signup successful"
