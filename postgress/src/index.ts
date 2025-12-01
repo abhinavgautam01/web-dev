@@ -45,6 +45,20 @@ app.post("/signup", async (req, res)=>{
     }
 })
 
+app.get("/metadata", async (req, res)=>{
+    const id = req.query.id;
+    const query1 = "SELECT id, username, email from users WHERE id=$1;";
+    const response1 = await client.query(query1, [id])
+
+    const query2 = "SELECT * FROM addresses WHERE user_id=$1;";
+    const response2 = await client.query(query2, [id])
+
+    res.json({
+        user: response1.rows[0],
+        address: response2.rows[0],
+    })
+})
+
 app.listen(3000, ()=> {
     console.log("http://localhost:3000")
 })
