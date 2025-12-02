@@ -59,6 +59,23 @@ app.get("/metadata", async (req, res)=>{
     })
 })
 
+app.get("/better-metadata", async(req, res)=>{
+    const id = req.query.id;
+
+    const query = `SELECT users.id, users.username, users.email, addresses.city, addresses.country, addresses.street, addresses.pincode FROM users JOIN addresses ON users.id = addresses.user_id WHERE users.id = $1;`;
+    try {
+        const response = await client.query(query, [id])
+        res.json({
+            users_detail: response.rows
+        })
+    } catch (error) {
+        res.status(403).json({
+            message: "Failed to fetch data"
+        })
+    }
+        
+})
+
 app.listen(3000, ()=> {
     console.log("http://localhost:3000")
 })
