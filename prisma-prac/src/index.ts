@@ -1,11 +1,8 @@
-import { PrismaClient } from "./generated/prisma/client.js";
-
-// @ts-ignore
-const client = new PrismaClient()
+import { prisma } from "./lib"
 
 async function main(){
     try {
-        const user = await client.user.create({
+        const user = await prisma.user.create({
             data: {
                 username: "new_client",
                 password: "test",
@@ -16,7 +13,7 @@ async function main(){
     } catch (error) {
         console.error("Error:", error)
     } finally {
-        await client.$disconnect()
+        await prisma.$disconnect()
     }
 }
 
