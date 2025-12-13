@@ -1,15 +1,28 @@
 import axios from "axios"
 
-async function getPosts(){
-    const response = await axios.get("https://jsonplaceholder.typicode.com/posts")   
+async function getTodos(){
+    const response = await axios.get("https://jsonplaceholder.typicode.com/todos")   
     return response.data
 }
 
-export default async function Posts(){
-    const posts = await getPosts()
+interface ITodo {
+    title: string,
+    completed: boolean
+}
+
+function Todo({title, completed}: ITodo){
     return (
         <div>
-            {JSON.stringify(posts)}
+            {title} {completed ? "done" : "not done!"}
+        </div>
+    )
+}
+
+export default async function Todos(){
+    const todos = await getTodos()
+    return (
+        <div>
+            {todos.map(todo=><Todo title={todo.title} completed={todo.completed} />)}
         </div>
     )
 }
