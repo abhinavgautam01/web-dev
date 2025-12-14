@@ -18,6 +18,8 @@ function Todo({title, completed}: ITodo){
     )
 }
 
+
+
 export default async function Todos(){
     const todos = await getTodos()
     return (
