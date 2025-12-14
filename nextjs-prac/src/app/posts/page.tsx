@@ -22,7 +22,8 @@ export default async function Todos(){
     const todos = await getTodos()
     return (
         <div>
-            {todos.map(todo=><Todo title={todo.title} completed={todo.completed} />)}
+            {/*@ts-ignore*/}
+            {todos.map(todo=><Todo key={todo.title} title={todo.title} completed={todo.completed} />)}
         </div>
     )
 }
